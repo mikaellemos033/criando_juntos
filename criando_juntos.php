@@ -14,6 +14,8 @@ function return_view(){
 
     if( !empty($_GET['see_content']) && is_numeric($_GET['see_content']) ){
         return include(plugin_dir_path(__FILE__) . 'views/single.php');
+    }else if( !empty($_GET['post_id']) && !empty($_GET['user_id']) ){
+        return include(plugin_dir_path(__FILE__) . 'views/user.php');
     }
     return include(plugin_dir_path(__FILE__) . 'views/index.php');
 }

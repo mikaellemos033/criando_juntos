@@ -1,6 +1,14 @@
-<?php 
- global $wpdb;
- $dados = $wpdb->get_results("select DISTINCT post_id from criando_juntos") ;
+<?php
+global $wpdb;
+
+$post_id = $_GET['post_id'];
+$user_id = $_GET['user_id'];
+
+if( !is_numeric($post_id) || !is_numeric($user_id) ){
+    header( "Location: " . bloginfo('url') .'/wp-admin/admin.php?page=criando_juntos');
+}
+
+$dados = $wpdb->get_results("select * from criando_juntos where post_id= '{$post_id}' and user_id = '{$user_id}'") ;
 ?>
 <style>
     .main{
@@ -35,13 +43,11 @@
         </tr>
 
         <?php
-            foreach( $dados as $post ):
-                $post = get_post($post->post_id);
-                ?>
-        <tr>
-            <td><?= $post->post_title ?></td>
-            <td><a href="?page=criando_juntos&see_content=<?= $post->ID ?>">ver</a></td>
-        </tr>
+        foreach( $dados as $post ): ?>
+            <tr>
+                <td><?= $post->campo ?></td>
+                <td><a target="_blank" href="<?= bloginfo('url') . '/wp-content/uploads' . $post->file ?>">ver</a></td>
+            </tr>
         <?php endforeach; ?>
     </table>
 
