@@ -1,2 +1,1 @@
-# criando_juntos
-# Criando Juntos Plugin wordpress
+# Criando Juntos Plugin wordpress 
