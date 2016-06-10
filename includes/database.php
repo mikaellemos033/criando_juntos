@@ -13,7 +13,7 @@
   `post_id` int(11) NOT NULL ,
   `file` VARCHAR(255) NOT NULL,
   `campo` VARCHAR(255) NOT NULL,
-  `data` TIMESTAMP,
+  `data` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`)
  );';
 

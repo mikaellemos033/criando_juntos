@@ -1,3 +1,7 @@
+<?php 
+ global $wpdb;
+ $dados = $wpdb->get_results("select DISTINCT post_id from criando_juntos") ;
+?>
 <style>
     .main{
         width: 70%;
@@ -22,21 +26,23 @@
     }
 </style>
 
-
 <main class="main">
     <table>
 
         <tr>
             <th>Nome da Publicação</th>
             <th>Ver</th>
-            <th>Data</th>
         </tr>
 
+        <?php
+            foreach( $dados as $post ):
+                $post = get_post($post->post_id);
+                ?>
         <tr>
-            <td>teste</td>
-            <td><a href="?page=criando_juntos&see_content=10">ver</a></td>
-            <td>teste</td>
+            <td><?= $post->post_title ?></td>
+            <td><a href="?page=criando_juntos&see_content="<?= $post->ID ?>>ver</a></td>
         </tr>
+        <?php endforeach; ?>
     </table>
 
 </main>
