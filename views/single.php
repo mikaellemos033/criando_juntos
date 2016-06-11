@@ -8,33 +8,12 @@ if( empty($_GET['see_content']) || !is_numeric($_GET['see_content']) ){
 $post_id = (int) $_GET['see_content'];
 $dados = $wpdb->get_results("select DISTINCT user_id from criando_juntos where post_id='{$post_id}'") ;
 $post = get_post($post_id);
+include dirname(__FILE__) .'/css.php';
 ?>
-<style>
-    .main{
-        width: 70%;
-        margin: 20px 0;
-        background: #ffffff;
-        box-shadow: 0 4px 3px #ddd;
-        border-box: box-sizing;
-        padding: 20px 10px;
-    }
-    .main table{
-        width: 100%;
-        display: table;
-    }
-
-    .main table th, .main table td{
-        text-align: left;
-        padding: 2px 10px;
-    }
-
-    .main table tr{
-        padding: 10px 0;
-    }
-</style>
 
 <main class="main">
-    <h2 style="margin-left: 10px;"><?= $post->post_title ?></h2>
+    <strong><a style="margin-left: 10px;" href="<?= bloginfo('url'). '/wp-admin/admin.php?page=criando_juntos'?>">voltar</a></strong>
+    <h2 style="margin-left: 10px;"><small>Nome da Publicação:</small> <strong><?= $post->post_title ?></strong></h2>
     <table>
 
         <tr>
