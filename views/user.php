@@ -20,14 +20,32 @@ include dirname(__FILE__) .'/css.php';
         <h2 style="margin-left: 10px;"><small>Nome da Publicação:</small> <strong><?= $post->post_title ?></strong></h2>
         <tr>
             <th>Campo</th>
-            <th>Ver</th>
+            <th>media</th>
+            <th>Download</th>
         </tr>
 
         <?php
         foreach( $dados as $post ): ?>
             <tr>
                 <td><?= $post->campo ?></td>
-                <td><a target="_blank" href="<?= bloginfo('url') . '/wp-content/uploads' . $post->file ?>">ver</a></td>
+                <td>
+                    <?php
+                        $file = strchr($post->file, '.');
+                        $img = null;
+
+                        if( in_array($file , array('.jpg', '.gif', '.png', '.jpeg', '.pjeg')) ){
+                            $img =  get_site_url() . '/wp-content/uploads' . $post->file;
+                        }elseif( in_array($file, array('.mp4', '.mpeg', '.avi', '.wmv', '.jpm', '.3gp', '.flv')) ){
+                            $img = get_site_url() . '/wp-content/plugins/criando_juntos/img/video-camera-icon.png';
+                        }else{
+                            $img = get_site_url() . '/wp-content/plugins/criando_juntos/img/audio_file.png';
+                        }
+                    ?>
+                    <a target="_blank" href="<?= bloginfo('url') . '/wp-content/uploads' . $post->file ?>">
+                        <img src="<?= $img ?>" style="max-width: 45px">
+                    </a>
+                </td>
+                <td><a target="_blank" href="<?= bloginfo('url') . '/wp-content/uploads' . $post->file ?>">Download</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
